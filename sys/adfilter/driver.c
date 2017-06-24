@@ -15,16 +15,16 @@ int load_host(PUNICODE_STRING reg)
 
 #if 1// query file path
 	
-	RtlInitEmptyUnicodeString(&g_adf.AdHost.path, g_adf.AdHost._path, sizeof(g_adf.AdHost._path));
+	DefUnicodeString(file, 1024);
 
 	RTL_QUERY_REGISTRY_TABLE rtl[2];
 	RtlZeroMemory(rtl, sizeof(rtl));
 
 	rtl[0].Flags = RTL_QUERY_REGISTRY_DIRECT;
 	rtl[0].Name = L"AdHostFilePath";
-	rtl[0].EntryContext = &g_adf.AdHost.path;
+	rtl[0].EntryContext = &file;
 	rtl[0].DefaultType = REG_SZ;
-	rtl[0].DefaultData = g_adf.AdHost.path.Buffer;
+	rtl[0].DefaultData = file.Buffer;
 	rtl[0].DefaultLength = 0;
 
 	NTSTATUS status = RtlQueryRegistryValues(RTL_REGISTRY_ABSOLUTE, 
@@ -37,12 +37,12 @@ int load_host(PUNICODE_STRING reg)
 #endif// query file path
 
 #if 1 // load ad hosts from file
-	KdPrint(("[adf] load ad hosts from %wZ\n", &g_adf.AdHost.path));
+	KdPrint(("[adf] load ad hosts from %wZ\n", &file));
 
-	ExInitializeSListHead(&g_adf.AdHost.list);
+	ExInitializeSListHead(&Adf.AdHost.list);
 
 	OBJECT_ATTRIBUTES attr;
-	InitializeObjectAttributes(&attr, &g_adf.AdHost.path,
+	InitializeObjectAttributes(&attr, &file,
 		OBJ_CASE_INSENSITIVE | OBJ_KERNEL_HANDLE,
 		NULL, NULL);
 
@@ -57,7 +57,7 @@ int load_host(PUNICODE_STRING reg)
 		NULL, 0);
 	if (!NT_SUCCESS(status))
 	{
-		KdPrint(("[adf] open file failed.(%wZ)\n", &g_adf.AdHost.path));
+		KdPrint(("[adf] open file failed.(%wZ)\n", &file));
 		return status;
 	}
 	
@@ -104,7 +104,7 @@ int load_host(PUNICODE_STRING reg)
 
 			// get the len length
 			int l = strlen(len);
-			KdPrint(("[adf] read : %s", len));
+			//KdPrint(("[adf] read : %s", len));
 
 			// allocate memory
 			PHostList e = ExAllocatePoolWithTag(NonPagedPool, sizeof(HostList), MEM);
@@ -122,7 +122,7 @@ int load_host(PUNICODE_STRING reg)
 
 			// add host to list
 			RtlCopyMemory(e->name, len, l + 1);
-			InterlockedPushEntrySList(&g_adf.AdHost.list, (PSLIST_ENTRY)e);
+			InterlockedPushEntrySList(&Adf.AdHost.list, (PSLIST_ENTRY)e);
 
 			i += last_line_offset;
 		}
@@ -139,7 +139,7 @@ int load_host(PUNICODE_STRING reg)
 		&iosb, buff, 256, &offset, NULL);
 	if (NT_SUCCESS(status))
 	{
-		KdPrint(("[adf] read : %s", buff));
+		//KdPrint(("[adf] read : %s", buff));
 	}
 	int l = strlen(buff);
 	// allocate memory
@@ -158,7 +158,7 @@ int load_host(PUNICODE_STRING reg)
 
 	// add host to list
 	RtlCopyMemory(e->name, buff, l + 1);
-	InterlockedPushEntrySList(&g_adf.AdHost.list, (PSLIST_ENTRY)e);
+	InterlockedPushEntrySList(&Adf.AdHost.list, (PSLIST_ENTRY)e);
 
 #endif// read the last line
 
@@ -168,7 +168,67 @@ int load_host(PUNICODE_STRING reg)
 	return status;
 }
 
+void unload_host()
+{
+	while (true)
+	{
+		// get each entry in list
+		PSLIST_ENTRY e = InterlockedPopEntrySList(&Adf.AdHost.list);
+		if (!e) break;
 
+		ExFreePoolWithTag(CONTAINING_RECORD(e, HostList, list)->name, MEM);
+		ExFreePoolWithTag(e, MEM);
+	}
+}
+
+NTSTATUS create_device(PDRIVER_OBJECT driver)
+{
+	// create device
+	UNICODE_STRING name;
+	RtlInitUnicodeString(&name, CONTROL_DEVICE_NAME);
+	
+	NTSTATUS status = IoCreateDevice(driver, 0, &name, FILE_DEVICE_CONTROLLER, 
+		0, false, &Adf.device);
+	test("Create device failed.\n");
+
+	Adf.device->Flags |= DO_BUFFERED_IO;
+
+	// add to tdifw engine
+	if (!tdifw_register_user_device(Adf.device))
+	{
+		log("Registry device failed.\n");
+		IoDeleteDevice(Adf.device);
+		return status;
+	}
+
+	// create symbol link
+	UNICODE_STRING symb;
+	RtlInitUnicodeString(&symb, CONTROL_DEVICE_SYMB);
+
+	status = IoCreateSymbolicLink(&symb, &name);
+	chk
+	{
+		log("Create symbol link failed.\n");
+		IoDeleteDevice(Adf.device);
+		return status;
+	};
+
+	KdPrint((APP"Create device: %wZ\n", &symb));
+	
+	return status;
+}
+
+void delete_device()
+{
+	// delete symbol link
+	UNICODE_STRING symb;
+	RtlInitUnicodeString(&symb, CONTROL_DEVICE_SYMB);
+	
+	IoDeleteSymbolicLink(&symb);
+
+	// delete device
+	IoDeleteDevice(Adf.device);
+}
 
 NTSTATUS
 tdifw_driver_entry(
@@ -176,9 +236,25 @@ tdifw_driver_entry(
             IN PUNICODE_STRING theRegistryPath)
 {
 	KdPrint(("[adf] driver start.(%wZ)\n", theRegistryPath));
+	
+	KeInitializeSpinLock(&Adf.lock);
 
-	g_adf.paused = false;
-	load_host(theRegistryPath);
+	Adf.paused = false;
+	NTSTATUS status = load_host(theRegistryPath);
+	if (!NT_SUCCESS(status))
+	{
+		KdPrint(("[adf] load host failed.\n"));
+		return status;
+	}
+
+	status = create_device(theDriverObject);
+	if (!NT_SUCCESS(status))
+	{
+		KdPrint(("[adf] create device failed.\n"));
+		
+		return status;
+	}
+
 
 	return STATUS_SUCCESS;
 }
@@ -188,23 +264,9 @@ tdifw_driver_unload(
 			IN PDRIVER_OBJECT DriverObject)
 {
     
-#if 1 // clear memory for host list
-	while (true)
-	{
-		// get each entry in list
-		PSLIST_ENTRY e = InterlockedPopEntrySList(&g_adf.AdHost.list);
-		ExFreePoolWithTag(CONTAINING_RECORD(e,HostList,list)->name, MEM);
-		ExFreePoolWithTag(e, MEM);
-	}
-#endif// clear memory for host list
+	delete_device();
+	unload_host();
 
 	return;
-}
-
-NTSTATUS tdifw_user_device_dispatch(
-	IN PDEVICE_OBJECT DeviceObject, IN PIRP irp)
-{
-    // 不会有任何请求到达这里。我们没有注册过自定义设备。
-    return STATUS_UNSUCCESSFUL;
 }
 

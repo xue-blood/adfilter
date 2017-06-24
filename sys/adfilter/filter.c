@@ -92,7 +92,7 @@ int filter(unsigned char *data, int len)
 
 	//dump_char(dns, strlen(dns));
 
-	for (PSLIST_ENTRY h = g_adf.AdHost.list.Next.Next; // get the first entry
+	for (PSLIST_ENTRY h = Adf.AdHost.list.Next.Next; // get the first entry
 		h; // is the last entry
 		h = h->Next) // go to next entry
 	{
@@ -136,7 +136,13 @@ int tdifw_udp_send(PUCHAR data, int len)
 {
 	if (!g_need_check) return FILTER_ALLOW;
 
-	if (g_adf.paused)  return FILTER_ALLOW;
+	// is need pause filter
+	KLOCK_QUEUE_HANDLE que;
+	KeAcquireInStackQueuedSpinLock(&Adf.lock, &que);
+	bool pause = Adf.paused;
+	KeReleaseInStackQueuedSpinLock(&que);
+
+	if (pause)  return FILTER_ALLOW;
 
 	len--;
 	//dump_hex(data, len);
