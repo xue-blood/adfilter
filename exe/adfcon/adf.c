@@ -1,6 +1,5 @@
 #define ADF_IMPLEMENT
 #include "adf.h"
-#include <stdio.h>
 
 ADF_API HANDLE adf_open()
 {
@@ -18,9 +17,9 @@ ADF_API void adf_close(HANDLE h)
 
 ADF_API bool	adf_set_pause(HANDLE h,bool pause)
 {
-	DWORD ret;
-	log("ioctl : 0x%x", IOCTL_ADF_SET_PAUSE);
+	if (h == INVALID_HANDLE_VALUE) return false;
 
+	DWORD ret;
 	bool status = DeviceIoControl(h, IOCTL_ADF_SET_PAUSE,
 		&pause, sizeof(pause),	// IN 
 		NULL, 0,				// OUT
@@ -31,5 +30,42 @@ ADF_API bool	adf_set_pause(HANDLE h,bool pause)
 
 ADF_API bool	adf_get_pause(HANDLE h)
 {
+	if (h == INVALID_HANDLE_VALUE) return false;
 
+	DWORD ret;
+	bool pause = true;
+	bool status = DeviceIoControl(h, IOCTL_ADF_GET_PAUSE,
+		NULL, 0,						// IN 
+		&pause, sizeof(bool),			// OUT
+		&ret, NULL);
+
+	return status && pause;
+}
+
+ADF_API bool	adf_add_host(HANDLE h,char* host,int len)
+{
+	if (len > ADF_HOST_MAX_LEN || !host) return false;
+
+	DWORD ret;
+	bool status = DeviceIoControl(h, IOCTL_ADF_ADD_HOST,
+		host, len+1,	// IN 
+		NULL, 0,				// OUT
+		&ret, NULL);
+
+	system("ipconfig /flushdns");
+
+	return status;
+}
+
+ADF_API bool	adf_del_host(HANDLE h, char* host, int len)
+{
+	if (len > ADF_HOST_MAX_LEN || !host) return false;
+	
+	DWORD ret;
+	bool status = DeviceIoControl(h, IOCTL_ADF_DEL_HOST,
+		host, len + 1,	// IN 
+		NULL, 0,				// OUT
+		&ret, NULL);
+
+	return status;
 }

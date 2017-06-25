@@ -121,7 +121,9 @@ int load_host(PUNICODE_STRING reg)
 			}
 
 			// add host to list
+			RtlZeroMemory(e->name, l + 1);
 			RtlCopyMemory(e->name, len, l + 1);
+			e->invalid = false;
 			InterlockedPushEntrySList(&Adf.AdHost.list, (PSLIST_ENTRY)e);
 
 			i += last_line_offset;
@@ -155,7 +157,7 @@ int load_host(PUNICODE_STRING reg)
 		KdPrint(("[adf] allocate memory failed.\n"));
 		return STATUS_MEMORY_NOT_ALLOCATED;
 	}
-
+	e->invalid = false;
 	// add host to list
 	RtlCopyMemory(e->name, buff, l + 1);
 	InterlockedPushEntrySList(&Adf.AdHost.list, (PSLIST_ENTRY)e);

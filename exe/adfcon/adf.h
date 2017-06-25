@@ -37,9 +37,14 @@
 #define log 
 #endif
 
+#define ADF_HOST_MAX_LEN 128
+
+
 ADF_API HANDLE	adf_open();
 ADF_API void	adf_close(HANDLE h);
 
 ADF_API bool	adf_set_pause(HANDLE h,bool pause);
 ADF_API bool	adf_get_pause(HANDLE h);
 
+ADF_API bool	adf_add_host(HANDLE h, char* host, int len);
+ADF_API bool	adf_del_host(HANDLE h, char* host, int len);

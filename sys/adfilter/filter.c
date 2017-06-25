@@ -92,17 +92,28 @@ int filter(unsigned char *data, int len)
 
 	//dump_char(dns, strlen(dns));
 
-	for (PSLIST_ENTRY h = Adf.AdHost.list.Next.Next; // get the first entry
-		h; // is the last entry
-		h = h->Next) // go to next entry
+	KLOCK_QUEUE_HANDLE que;
+	
+	KeAcquireInStackQueuedSpinLock(&Adf.lock, &que);
+	for (PSLIST_ENTRY h = Adf.AdHost.list.Next.Next;
+		h;
+		h = h->Next)
 	{
 		char * name = CONTAINING_RECORD(h, HostList, list)->name;
+		bool invalid = CONTAINING_RECORD(h, HostList, list)->invalid;
+
+		// is valid
+		if (invalid) continue;
+
 		if (memcmp(dns, name, strlen(name)) == 0)
 		{
+			KeReleaseInStackQueuedSpinLock(&que);
 			KdPrint(("[adf] ad host found : %s", name));
 			return true;
 		}
+
 	}
+	KeReleaseInStackQueuedSpinLock(&que);
 
 	return false;
 }

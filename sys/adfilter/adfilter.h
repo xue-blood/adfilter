@@ -33,6 +33,7 @@ typedef struct _HostList
 
 	// our member
 	char* name;
+	bool  invalid;
 }HostList, *PHostList;
 
 #define isalpha(c) (((c) >= 'a' && (c) <= 'z') || ((c) >= 'A' && (c) <= 'Z'))
@@ -52,6 +53,8 @@ typedef struct _HostList
 #define CONTROL_DEVICE_NAME L"\\Device\\Ad_filter_control_device"
 #define CONTROL_DEVICE_SYMB L"\\??\\Ad_filter_control_device"
 
+#define ADF_HOST_MAX_LEN 128
+
 /*
 // define io control code
 // see:https://msdn.microsoft.com/en-us/library/windows/hardware/ff543023(v=vs.85).aspx
@@ -66,3 +69,8 @@ typedef struct _HostList
 
 // statistic
 #define IOCTL_ADF_STATISTIC CTL_CODE(FILE_DEVICE_CONTROLLER,0x805,METHOD_BUFFERED,FILE_READ_ACCESS|FILE_WRITE_ACCESS)
+
+
+
+void dump_hex(PUCHAR data, int len);
+void dump_hex(PUCHAR data, int len);
