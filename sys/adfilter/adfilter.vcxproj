@@ -208,9 +208,11 @@
     <FilesToPackage Include="@(Inf->'%(CopyOutput)')" Condition="'@(Inf)'!=''" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="adfilter.c" />
     <ClCompile Include="dispatch.c" />
     <ClCompile Include="filter.c" />
     <ClCompile Include="driver.c" />
+    <ClCompile Include="list.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="adfilter.h" />

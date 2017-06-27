@@ -42,12 +42,12 @@ ADF_API bool	adf_get_pause(HANDLE h)
 	return status && pause;
 }
 
-ADF_API bool	adf_add_host(HANDLE h,char* host,int len)
+ADF_API bool	adf_add_user_host(HANDLE h, char* host, int len)
 {
-	if (len > ADF_HOST_MAX_LEN || !host) return false;
-
+	if (len > ADF_HOST_MAX_LEN +1 || !host) return false;
+	
 	DWORD ret;
-	bool status = DeviceIoControl(h, IOCTL_ADF_ADD_HOST,
+	bool status = DeviceIoControl(h, IOCTL_ADF_ADD_USER_HOST,
 		host, len+1,	// IN 
 		NULL, 0,				// OUT
 		&ret, NULL);
@@ -57,12 +57,41 @@ ADF_API bool	adf_add_host(HANDLE h,char* host,int len)
 	return status;
 }
 
-ADF_API bool	adf_del_host(HANDLE h, char* host, int len)
+ADF_API bool	adf_del_user_host(HANDLE h, char* host, int len)
 {
 	if (len > ADF_HOST_MAX_LEN || !host) return false;
 	
 	DWORD ret;
-	bool status = DeviceIoControl(h, IOCTL_ADF_DEL_HOST,
+	bool status = DeviceIoControl(h, IOCTL_ADF_DEL_USER_HOST,
+		host, len + 1,	// IN 
+		NULL, 0,				// OUT
+		&ret, NULL);
+
+	return status;
+}
+
+
+ADF_API bool	adf_add_except_host(HANDLE h, char* host, int len)
+{
+	if (len > ADF_HOST_MAX_LEN + 1 || !host) return false;
+
+	DWORD ret;
+	bool status = DeviceIoControl(h, IOCTL_ADF_ADD_EXCEPT_HOST,
+		host, len + 1,	// IN 
+		NULL, 0,				// OUT
+		&ret, NULL);
+
+	system("ipconfig /flushdns");
+
+	return status;
+}
+
+ADF_API bool	adf_del_except_host(HANDLE h, char* host, int len)
+{
+	if (len > ADF_HOST_MAX_LEN || !host) return false;
+
+	DWORD ret;
+	bool status = DeviceIoControl(h, IOCTL_ADF_DEL_EXCEPT_HOST,
 		host, len + 1,	// IN 
 		NULL, 0,				// OUT
 		&ret, NULL);

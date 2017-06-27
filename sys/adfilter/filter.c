@@ -89,33 +89,32 @@ char* fmt_dns_msg(unsigned char *data, int len)
 int filter(unsigned char *data, int len)
 {
 	char * dns = fmt_dns_msg(data, len);
-
+	int dnslen = strlen(dns);
 	//dump_char(dns, strlen(dns));
 
 	KLOCK_QUEUE_HANDLE que;
-	
 	KeAcquireInStackQueuedSpinLock(&Adf.lock, &que);
-	for (PSLIST_ENTRY h = Adf.AdHost.list.Next.Next;
-		h;
-		h = h->Next)
-	{
-		char * name = CONTAINING_RECORD(h, HostList, list)->name;
-		bool invalid = CONTAINING_RECORD(h, HostList, list)->invalid;
+	
+	// search in except list
+	bool found = isInHostList(&Adf.AdHost.excpt, dns, dnslen);
+	if (found) goto _found_in_except_;
 
-		// is valid
-		if (invalid) continue;
+	found = isInHostList(&Adf.AdHost.user, dns, dnslen);
+	if (found) goto _found_;
 
-		if (memcmp(dns, name, strlen(name)) == 0)
-		{
-			KeReleaseInStackQueuedSpinLock(&que);
-			KdPrint(("[adf] ad host found : %s", name));
-			return true;
-		}
+	found = isInHostList(&Adf.AdHost.sys, dns, dnslen);
+	if (found) goto _found_;
 
-	}
+	goto _no_found_;
+
+_found_in_except_:
+	found = false; // found in except,we need skip it
+	KdPrint((APP"ad host: %s found in except list.\n", dns));
+_found_:
+	KdPrint((APP"ad host: %s found.\n", dns));
+_no_found_:
 	KeReleaseInStackQueuedSpinLock(&que);
-
-	return false;
+	return found;
 }
 
 

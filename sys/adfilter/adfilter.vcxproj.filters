@@ -20,6 +20,12 @@
     <ClCompile Include="dispatch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="adfilter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="list.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="adfilter.h">
