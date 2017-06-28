@@ -15,6 +15,7 @@ ADF_API void adf_close(HANDLE h)
 		CloseHandle(h);
 }
 
+
 ADF_API bool	adf_set_pause(HANDLE h,bool pause)
 {
 	if (h == INVALID_HANDLE_VALUE) return false;
@@ -97,4 +98,34 @@ ADF_API bool	adf_del_except_host(HANDLE h, char* host, int len)
 		&ret, NULL);
 
 	return status;
+}
+
+ADF_API bool	adf_host(HANDLE h, char* host, int len, bool add, bool except)
+{
+	if (len > ADF_HOST_MAX_LEN || !host) return false;
+
+	DWORD code = (except ?  ( add ? IOCTL_ADF_ADD_EXCEPT_HOST : IOCTL_ADF_DEL_EXCEPT_HOST) : 
+							( add ? IOCTL_ADF_ADD_USER_HOST : IOCTL_ADF_DEL_USER_HOST));
+
+	DWORD ret;
+	bool status = DeviceIoControl(h, code,
+		host, len + 1,	// IN 
+		NULL, 0,				// OUT
+		&ret, NULL);
+
+
+	if (add)	system("ipconfig /flushdns");
+
+	return status;
+}
+
+
+ADF_API bool	adf_install()
+{
+	return system("install.bat");
+}
+
+ADF_API bool	adf_remove()
+{
+	return system("remove.bat");
 }

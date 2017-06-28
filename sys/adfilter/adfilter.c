@@ -143,7 +143,7 @@ NTSTATUS load_cfg(PUNICODE_STRING path)
 	InitializeListHead(&Adf.AdHost.sys);
 	InitializeListHead(&Adf.AdHost.user);
 	InitializeListHead(&Adf.AdHost.excpt);
-	KdBreakPoint();
+	
 	// load pause status
 	query_reg(path, L"Pause", &Adf.paused, REG_DWORD, &Adf.paused, sizeof(ULONG));
 	KdPrint((APP"driver status %s\n", Adf.paused ? "paused" : "not paused"));

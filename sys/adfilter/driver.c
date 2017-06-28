@@ -69,12 +69,12 @@ tdifw_driver_entry(
 	NTSTATUS status = STATUS_SUCCESS;
 	
 	status = load_cfg(theRegistryPath);
-	if (!NT_SUCCESS(status))
-	{
-		KdPrint(("[adf] load config failed.\n"));
-		unload_cfg();
-		return status;
-	}
+// 	if (!NT_SUCCESS(status))
+// 	{
+// 		KdPrint(("[adf] load config failed.\n"));
+// 		unload_cfg();
+// 		return status;
+// 	}
 	
 	status = create_device(theDriverObject);
 	if (!NT_SUCCESS(status))

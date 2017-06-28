@@ -9,6 +9,7 @@ void promot()
 {
 	char s[] = \
 "Usage:\n\
+	adfcon install/remove : install or remove the driver.\n\
 	adfcon start/stop	: start or stop the driver.\n\
 	adfcon show		: show the status of driver.\n\
 	adfcon add/del (hostname): add or delete host.\n\
@@ -32,14 +33,19 @@ int main(int argc, char** argv)
 		return 0;
 	}
 
-	h = adf_open();
-	printf("open device %s\n", h == INVALID_HANDLE_VALUE ? "failed." : "success.");
-	if (h == INVALID_HANDLE_VALUE) return -1;
-
 	char *cmd = argv[1];
 	do 
 	{
 		// argc == 2
+		Cmd("install",	adf_install());
+		Cmd("remove",	adf_remove());
+	
+
+
+		h = adf_open();
+		printf("open device %s\n", h == INVALID_HANDLE_VALUE ? "failed." : "success.");
+		if (h == INVALID_HANDLE_VALUE) return -1;
+
 		Cmd("start",	adf_set_pause(h, false));
 		Cmd("stop",		adf_set_pause(h, true));
 		Cmd("show",		printf("driver is %s\n", 
@@ -48,14 +54,14 @@ int main(int argc, char** argv)
 		// argc == 3
 		if (argc != 3)  printf("please input the host name\n");
 		Cmd("add",		printf("add host %s.\n",
-							adf_add_user_host(h,argv[2],strlen(argv[2]))?"success":"failed"));
+							adf_host(h,argv[2],strlen(argv[2]),true,false)?"success":"failed"));
 		Cmd("del",		printf("delete host %s.\n", 
-							adf_del_user_host(h, argv[2], strlen(argv[2])) ? "success" : "failed"));
+							adf_host(h, argv[2], strlen(argv[2]),false,false) ? "success" : "failed"));
 
 		Cmd("addE",		printf("add host %s.\n",
-							adf_add_except_host(h, argv[2], strlen(argv[2])) ? "success" : "failed"));
+							adf_host(h, argv[2], strlen(argv[2]),true,true) ? "success" : "failed"));
 		Cmd("delE",		printf("delete host %s.\n",
-							adf_del_except_host(h, argv[2], strlen(argv[2])) ? "success" : "failed"));
+							adf_host(h, argv[2], strlen(argv[2]),false,true) ? "success" : "failed"));
 
 
 		// invalid command
