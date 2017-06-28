@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls">
+
+
+    <!-- region hamburgermenu style -->
+    <DataTemplate DataType="{x:Type ui:HamburgerMenuGlyphItem}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </DataTemplate>
+    <!-- endregion -->
+    
+</ResourceDictionary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,27 @@ namespace adfilter
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
+        Adf libadf = new Adf();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            if(libadf.Invalid)
+            {
+                MessageBox.Show("Open device failed.");
+                App.Current.Shutdown();
+            }
+        }
+
+        private void HamburgerMenu_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            HamburgerMenu hm = sender as HamburgerMenu;
+
+            hm.Content = e.ClickedItem;
+            hm.IsPaneOpen = false;
         }
     }
 }

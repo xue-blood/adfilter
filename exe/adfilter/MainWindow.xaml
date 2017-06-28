@@ -1,8 +1,13 @@
-﻿<Window x:Class="adfilter.MainWindow"
+﻿<ui:MetroWindow x:Class="adfilter.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="MainWindow" Height="350" Width="525"
+        Style="{StaticResource WindowStyle}">
     <Grid>
-        
+        <ui:HamburgerMenu ItemClick="HamburgerMenu_ItemClick"
+                          OptionsItemClick="HamburgerMenu_ItemClick">
+            
+        </ui:HamburgerMenu>
     </Grid>
-</Window>
+</ui:MetroWindow>

@@ -17,6 +17,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "adfilter", "sys\adfilter\ad
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug(dll)|Any CPU = Debug(dll)|Any CPU
+		Debug(dll)|Mixed Platforms = Debug(dll)|Mixed Platforms
+		Debug(dll)|Win32 = Debug(dll)|Win32
+		Debug(dll)|x64 = Debug(dll)|x64
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
@@ -51,6 +55,14 @@ Global
 		Win8.1 Release|x64 = Win8.1 Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug(dll)|Any CPU.ActiveCfg = Debug(dll)|Win32
+		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug(dll)|Mixed Platforms.ActiveCfg = Debug(dll)|Win32
+		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug(dll)|Mixed Platforms.Build.0 = Debug(dll)|Win32
+		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug(dll)|Mixed Platforms.Deploy.0 = Debug(dll)|Win32
+		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug(dll)|Win32.ActiveCfg = Debug(dll)|Win32
+		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug(dll)|Win32.Build.0 = Debug(dll)|Win32
+		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug(dll)|Win32.Deploy.0 = Debug(dll)|Win32
+		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug(dll)|x64.ActiveCfg = Debug(dll)|Win32
 		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{05849DC2-6170-4493-A520-35E54135BF9B}.Debug|Mixed Platforms.Build.0 = Debug|Win32
@@ -114,6 +126,12 @@ Global
 		{05849DC2-6170-4493-A520-35E54135BF9B}.Win8.1 Release|Win32.Build.0 = Release|Win32
 		{05849DC2-6170-4493-A520-35E54135BF9B}.Win8.1 Release|Win32.Deploy.0 = Release|Win32
 		{05849DC2-6170-4493-A520-35E54135BF9B}.Win8.1 Release|x64.ActiveCfg = Release|Win32
+		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Debug(dll)|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Debug(dll)|Any CPU.Build.0 = Debug|Any CPU
+		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Debug(dll)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Debug(dll)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Debug(dll)|Win32.ActiveCfg = Debug|Any CPU
+		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Debug(dll)|x64.ActiveCfg = Debug|Any CPU
 		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -162,6 +180,15 @@ Global
 		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Win8.1 Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Win8.1 Release|Win32.ActiveCfg = Release|Any CPU
 		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Win8.1 Release|x64.ActiveCfg = Release|Any CPU
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Any CPU.ActiveCfg = Win8 Release|Win32
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Mixed Platforms.ActiveCfg = Win8 Release|Win32
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Mixed Platforms.Build.0 = Win8 Release|Win32
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Mixed Platforms.Deploy.0 = Win8 Release|Win32
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Win32.ActiveCfg = Win8 Release|Win32
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Win32.Build.0 = Win8 Release|Win32
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Win32.Deploy.0 = Win8 Release|Win32
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|x64.ActiveCfg = Win8 Release|x64
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|x64.Build.0 = Win8 Release|x64
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug|Any CPU.ActiveCfg = Win8.1 Debug|Win32
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug|Mixed Platforms.ActiveCfg = Win8.1 Debug|Win32
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug|Mixed Platforms.Build.0 = Win8.1 Debug|Win32
@@ -242,6 +269,15 @@ Global
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Win8.1 Release|x64.ActiveCfg = Win8.1 Release|x64
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Win8.1 Release|x64.Build.0 = Win8.1 Release|x64
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Win8.1 Release|x64.Deploy.0 = Win8.1 Release|x64
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Any CPU.ActiveCfg = Win8 Release|Win32
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Mixed Platforms.ActiveCfg = Win8 Release|Win32
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Mixed Platforms.Build.0 = Win8 Release|Win32
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Mixed Platforms.Deploy.0 = Win8 Release|Win32
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Win32.ActiveCfg = Win8 Release|Win32
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Win32.Build.0 = Win8 Release|Win32
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Win32.Deploy.0 = Win8 Release|Win32
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|x64.ActiveCfg = Win8 Release|x64
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|x64.Build.0 = Win8 Release|x64
 		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug|Any CPU.ActiveCfg = Win8.1 Debug|Win32
 		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug|Mixed Platforms.ActiveCfg = Win8.1 Debug|Win32
 		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug|Mixed Platforms.Build.0 = Win8.1 Debug|Win32
