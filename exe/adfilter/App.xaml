@@ -24,12 +24,8 @@
 
 
                 <ResourceDictionary Source="View\WindowStyle.xaml"/>
+                <ResourceDictionary Source="View\HamburgerMenu.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-
-
-            
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -9,12 +9,18 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Border>
+                    <Grid>
                         <Ellipse Width="18" Height="18"
                                  Fill="{TemplateBinding Background}"
                                  Opacity="{TemplateBinding Opacity}">
                         </Ellipse>
-                    </Border>
+                        <TextBlock Text="{TemplateBinding Tag}"
+                                   FontFamily="Segoe UI Symbol"
+                                   FontSize="8"
+                                   Foreground="Black"
+                                   Opacity="{TemplateBinding Opacity}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -26,6 +32,7 @@
             BasedOn="{StaticResource WindowButtonStyle}"
             TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Firebrick"/>
+        <Setter Property="Tag" Value="╳"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="Crimson" />
@@ -43,7 +50,8 @@
             BasedOn="{StaticResource WindowButtonStyle}"
             TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Green"/>
-        
+        <Setter Property="Tag" Value="❒"/>
+
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="LawnGreen" />
@@ -59,6 +67,7 @@
             BasedOn="{StaticResource WindowButtonStyle}"
             TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Goldenrod"/>
+        <Setter Property="Tag" Value="-"/>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">

@@ -18,6 +18,12 @@ namespace adfilter
         static extern void adf_close(IntPtr handle);
         #endregion
 
+        static Adf instance = null;
+        public static Adf Instance
+        {
+            get { return instance ?? (new Adf()); }
+        }
+
         IntPtr handle;
 
         public Adf()

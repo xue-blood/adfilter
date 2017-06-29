@@ -21,13 +21,11 @@ namespace adfilter
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        Adf libadf = new Adf();
-
         public MainWindow()
         {
             InitializeComponent();
 
-            if(libadf.Invalid)
+            if(Adf.Instance.Invalid)
             {
                 MessageBox.Show("Open device failed.");
                 App.Current.Shutdown();

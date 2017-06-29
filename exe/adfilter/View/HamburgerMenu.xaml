@@ -3,14 +3,59 @@
                     xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls">
 
 
-    <!-- region hamburgermenu style -->
-    <DataTemplate DataType="{x:Type ui:HamburgerMenuGlyphItem}">
-        <Grid>
+    <!-- region hamburgermenu template -->
+    <DataTemplate x:Key="MenuItemTemplate"
+                  DataType="{x:Type ui:HamburgerMenuGlyphItem}">
+        <Grid Height="48">
             <Grid.ColumnDefinitions>
-                
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0"
+                       FontSize="16" FontFamily="Segoe MDL2 Assets"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Foreground="White"
+                       Text="{Binding Glyph}"/>
+            <TextBlock Grid.Column="1"
+                       VerticalAlignment="Center"
+                       FontSize="16" Foreground="White"
+                       Text="{Binding Label}"/>
+        </Grid>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="HamburgerContentTemplate"
+                  DataType="{x:Type ui:HamburgerMenuItem}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="48"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            
+            <Border Grid.Row="0"
+                    Background="#ff444444"
+                    IsHitTestVisible="False">
+                <TextBlock Text="{Binding Label}"
+                           FontSize="24" Foreground="White"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+            
+            <ContentControl Grid.Row="1"
+                            Focusable="False"
+                            Content="{Binding Tag}"/>
         </Grid>
     </DataTemplate>
     <!-- endregion -->
+
+    <Style TargetType="{x:Type ui:HamburgerMenu}">
+        <Setter Property="IsPaneOpen" Value="False"/>
+        <Setter Property="DisplayMode" Value="CompactInline"/>
+
+        <Setter Property="ItemTemplate" Value="{StaticResource MenuItemTemplate}"/>
+        <Setter Property="OptionsItemTemplate" Value="{StaticResource MenuItemTemplate}"/>
+        <Setter Property="ContentTemplate" Value="{StaticResource HamburgerContentTemplate}"/>
+    </Style>
+    
+    
     
 </ResourceDictionary>

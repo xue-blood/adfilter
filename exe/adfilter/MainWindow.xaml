@@ -2,12 +2,38 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:view="clr-namespace:adfilter.View"
         Title="MainWindow" Height="350" Width="525"
         Style="{StaticResource WindowStyle}">
     <Grid>
         <ui:HamburgerMenu ItemClick="HamburgerMenu_ItemClick"
                           OptionsItemClick="HamburgerMenu_ItemClick">
+            <ui:HamburgerMenu.ItemsSource>
+                <ui:HamburgerMenuItemCollection>
+                    <ui:HamburgerMenuGlyphItem Glyph="" Label="Driver">
+                        <ui:HamburgerMenuGlyphItem.Tag>
+                            <view:Driver/>
+                        </ui:HamburgerMenuGlyphItem.Tag>
+                    </ui:HamburgerMenuGlyphItem>
+
+                    <ui:HamburgerMenuGlyphItem Glyph="" Label="Host">
+                        <ui:HamburgerMenuGlyphItem.Tag>
+                            <view:Host/>
+                        </ui:HamburgerMenuGlyphItem.Tag>
+                    </ui:HamburgerMenuGlyphItem>
+                    
+                </ui:HamburgerMenuItemCollection>
+            </ui:HamburgerMenu.ItemsSource>
             
+            <ui:HamburgerMenu.OptionsItemsSource>
+                <ui:HamburgerMenuItemCollection>
+                    <ui:HamburgerMenuGlyphItem Glyph="" Label="About">
+                        <ui:HamburgerMenuGlyphItem.Tag>
+                            <view:About/>
+                        </ui:HamburgerMenuGlyphItem.Tag>
+                    </ui:HamburgerMenuGlyphItem>
+                </ui:HamburgerMenuItemCollection>
+            </ui:HamburgerMenu.OptionsItemsSource>
         </ui:HamburgerMenu>
     </Grid>
 </ui:MetroWindow>
