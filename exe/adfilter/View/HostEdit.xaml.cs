@@ -13,15 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace adfilter.View
 {
     /// <summary>
-    /// Interaction logic for Driver.xaml
+    /// Interaction logic for HostEdit.xaml
     /// </summary>
-    public partial class Driver : UserControl
+    public partial class HostEdit : UserControl
     {
-        public Driver()
+        public HostEdit()
         {
             InitializeComponent();
         }

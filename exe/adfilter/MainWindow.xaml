@@ -7,7 +7,8 @@
         Style="{StaticResource WindowStyle}">
     <Grid>
         <ui:HamburgerMenu ItemClick="HamburgerMenu_ItemClick"
-                          OptionsItemClick="HamburgerMenu_ItemClick">
+                          OptionsItemClick="HamburgerMenu_ItemClick"
+                          SelectedIndex="1">
             <ui:HamburgerMenu.ItemsSource>
                 <ui:HamburgerMenuItemCollection>
                     <ui:HamburgerMenuGlyphItem Glyph="" Label="Driver">

@@ -16,12 +16,28 @@ namespace adfilter
 
         [DllImport("adfcon.dll")]
         static extern void adf_close(IntPtr handle);
+
+        [DllImport("adfcon.dll")]
+        static extern bool adf_set_pause(IntPtr handle, bool pause);
+
+        [DllImport("adfcon.dll")]
+        static extern bool adf_get_pause(IntPtr handle);
+
+        [DllImport("adfcon.dll")]
+        static extern bool adf_install();
+        [DllImport("adfcon.dll")]
+        static extern bool adf_remove();
+
+        [DllImport("adfcon.dll")]
+        static extern bool adf_host(IntPtr handle, [MarshalAs(UnmanagedType.LPStr)] string host, int host_len, bool add, bool except);
+
+
         #endregion
 
         static Adf instance = null;
         public static Adf Instance
         {
-            get { return instance ?? (new Adf()); }
+            get { return instance ?? ( instance = new Adf()); }
         }
 
         IntPtr handle;
@@ -36,11 +52,22 @@ namespace adfilter
             get { return (handle.ToInt32() == -1); }
         }
 
-        public void Close()
+        public bool Pause
         {
-            adf_close(handle);
+            get { return adf_get_pause(handle); }
+            set { adf_set_pause(handle, value); }
         }
 
+
+        public bool AddHost(string host,bool allow)
+        {
+            return adf_host(handle, host, host.Length, true, allow);
+        }
+
+        public bool DelHost(string host,bool allow)
+        {
+            return adf_host(handle, host, host.Length, false, allow);
+        }
 
         public void Dispose()
         {

@@ -6,6 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+using adfilter.Model;
+using System.Windows.Input;
+
 namespace adfilter.ViewModel
 {
     class DriverViewModel : INotifyPropertyChanged
@@ -16,6 +19,30 @@ namespace adfilter.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
+        }
+
+        private ICommand startCommand;
+        public ICommand StartCommand
+        {
+            get
+            {
+                return startCommand ?? (startCommand = new BaseCommand
+                {
+                    ExecuteDelegate = x => Adf.Instance.Pause = false
+                });
+            }
+        }
+
+        private ICommand stopCommand;
+        public ICommand StopCommand
+        {
+            get
+            {
+                return stopCommand ?? (stopCommand = new BaseCommand
+                    {
+                        ExecuteDelegate = x=> Adf.Instance.Pause = true
+                    });
+            }
         }
     }
 }
