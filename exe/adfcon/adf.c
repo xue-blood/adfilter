@@ -1,6 +1,29 @@
 #define ADF_IMPLEMENT
 #include "adf.h"
 
+// flush dns cache
+// doc:http://blog.csdn.net/chenlycly/article/details/26254007
+BOOL __stdcall DnsFlushResolverCache()
+{
+	BOOL bRet = FALSE;
+
+	typedef BOOL(WINAPI *PfuncDnsFlushResolverCache)(VOID);
+	HMODULE hDnsModule = LoadLibrary(TEXT("dnsapi.dll"));
+	if (hDnsModule != NULL)
+	{
+		PfuncDnsFlushResolverCache pFlushFun = GetProcAddress(hDnsModule, "DnsFlushResolverCache");
+		if (pFlushFun != NULL)
+		{
+			pFlushFun();
+			bRet = TRUE;
+		}
+
+		FreeLibrary(hDnsModule);
+	}
+
+	return bRet;
+}
+
 ADF_API HANDLE adf_open()
 {
 	HANDLE h = CreateFile(ADF_DEVICE_NAME, GENERIC_ALL,
@@ -53,7 +76,7 @@ ADF_API bool	adf_add_user_host(HANDLE h, char* host, int len)
 		NULL, 0,				// OUT
 		&ret, NULL);
 
-	system("ipconfig /flushdns");
+	DnsFlushResolverCache();
 
 	return status;
 }
@@ -82,7 +105,7 @@ ADF_API bool	adf_add_except_host(HANDLE h, char* host, int len)
 		NULL, 0,				// OUT
 		&ret, NULL);
 
-	system("ipconfig /flushdns");
+	DnsFlushResolverCache();
 
 	return status;
 }
@@ -114,7 +137,8 @@ ADF_API bool	adf_host(HANDLE h, char* host, int len, bool add, bool except)
 		&ret, NULL);
 
 
-	if (add)	system("ipconfig /flushdns");
+	if (add)	DnsFlushResolverCache();
+	
 
 	return status;
 }
