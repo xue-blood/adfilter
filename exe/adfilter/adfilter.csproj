@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\HostList.cs" />
     <Compile Include="ViewModel\DriverViewModel.cs" />
     <Compile Include="Model\BaseCommand.cs" />
     <Compile Include="ViewModel\HostViewModel.cs" />

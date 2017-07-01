@@ -6,14 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <StackPanel>
-            <TextBox Name="input" Width="300"/>
-            <Button Content="add" 
-                    Command="{Binding AddCommand}" 
-                    CommandParameter="{Binding ElementName=input,Path=Text}"/>
-            <Button Content="del"
-                    Command="{Binding DelCommand}" 
-                    CommandParameter="{Binding ElementName=input,Path=Text}"/>
-        </StackPanel>
+        <DataGrid ItemsSource="{Binding Hosts}">
+            
+        </DataGrid>
     </Grid>
 </UserControl>

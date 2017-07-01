@@ -1,16 +1,19 @@
 ﻿using adfilter.Model;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace adfilter.ViewModel
 {
-    abstract class HostViewModel : INotifyPropertyChanged
+    abstract class HostViewModel : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,6 +27,10 @@ namespace adfilter.ViewModel
         protected abstract bool AddHost(string host);
 
         protected abstract bool DelHost(string host);
+
+        public List<HostList> Hosts { get; set; }
+
+        protected abstract string RegKey { get; }
 
         private ICommand addCommand;
         public ICommand AddCommand
@@ -48,6 +55,55 @@ namespace adfilter.ViewModel
                     });
             }
         }
+
+        string GetFilePath()
+        {
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\services\adfilter") )
+            {
+                return key.GetValue(RegKey) as string;
+            }
+        }
+
+        public HostViewModel()
+        {
+            Hosts = new List<HostList>();
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(GetFilePath()))
+                {
+                    string l;
+                    while ((l = sr.ReadLine()) != null)
+                    {
+                        Hosts.Add(new HostList(l));
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        public void Dispose()
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(GetFilePath()))
+                {
+                    foreach (HostList h in Hosts)
+                    {
+                        sw.WriteLine(h.Host);
+                    }
+
+                    sw.Flush();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
     }
 
     class WhiteHostViewModel : HostViewModel
@@ -62,6 +118,10 @@ namespace adfilter.ViewModel
             return Adf.Instance.DelHost(host, true);
         }
 
+        protected override string RegKey
+        {
+            get { return "ExceptFilePath"; }
+        }
     }
 
     class BlackHostViewModel : HostViewModel
@@ -76,5 +136,9 @@ namespace adfilter.ViewModel
             return Adf.Instance.DelHost(host, false);
         }
 
+        protected override string RegKey
+        {
+            get { return "UserFilePath"; }
+        }
     }
 }

@@ -1,5 +1,5 @@
 echo off
-copy /Y adfilter.sys C:\Windows\System32\Drivers
+copy /Y adfilter.sys C:\Windows\System32\Drivers\adfilter.sys
 
 sc create adfilter binpath= system32\drivers\adfilter.sys start= auto type= kernel
 

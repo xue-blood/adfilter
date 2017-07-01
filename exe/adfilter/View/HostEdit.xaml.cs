@@ -23,6 +23,16 @@ namespace adfilter.View
         public HostEdit()
         {
             InitializeComponent();
+
+            // make sure this function will be called when exiting program
+            // see:https://stackoverflow.com/questions/14479038/how-to-fire-unload-event-of-usercontrol-in-a-wpf-window
+            this.Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
         }
+
+        void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        {
+            ((IDisposable)this.DataContext).Dispose();
+        }
+
     }
 }

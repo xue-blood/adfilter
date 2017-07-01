@@ -9,7 +9,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <ui:MetroAnimatedSingleRowTabControl>
+        <ui:MetroAnimatedSingleRowTabControl SelectedIndex="0">
+            
+            <TabItem Header="BlackList">
+                <view:HostEdit >
+                    <view:HostEdit.DataContext>
+                        <vm:BlackHostViewModel/>
+                    </view:HostEdit.DataContext>
+                </view:HostEdit>
+            </TabItem>
+
             <TabItem Header="WhiteList">
                 <view:HostEdit >
                     <view:HostEdit.DataContext>
@@ -18,13 +27,6 @@
                 </view:HostEdit>
             </TabItem>
 
-            <TabItem Header="BlackList">
-                <view:HostEdit >
-                    <view:HostEdit.DataContext>
-                        <vm:BlackHostViewModel/>
-                    </view:HostEdit.DataContext>
-                </view:HostEdit>
-            </TabItem>
         </ui:MetroAnimatedSingleRowTabControl>
     </Grid>
 </UserControl>
