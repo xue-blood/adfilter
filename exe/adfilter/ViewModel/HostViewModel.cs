@@ -75,7 +75,8 @@ namespace adfilter.ViewModel
                     string l;
                     while ((l = sr.ReadLine()) != null)
                     {
-                        Hosts.Add(new HostList(l));
+                        if (l.Length > 0)
+                            Hosts.Add(new HostList(l));
                     }
                 }
             }
@@ -93,7 +94,8 @@ namespace adfilter.ViewModel
                 {
                     foreach (HostList h in Hosts)
                     {
-                        sw.WriteLine(h.Host);
+                        if(h.Host.Length > 0)
+                            sw.WriteLine(h.Host);
                     }
 
                     sw.Flush();

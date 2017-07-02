@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:view="clr-namespace:adfilter.View"
-        Title="MainWindow" Height="350" Width="525"
+        Title="MainWindow" Height="600" Width="450"
         Style="{StaticResource WindowStyle}">
     <Grid>
         <ui:HamburgerMenu ItemClick="HamburgerMenu_ItemClick"

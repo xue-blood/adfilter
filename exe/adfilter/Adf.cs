@@ -61,11 +61,13 @@ namespace adfilter
 
         public bool AddHost(string host,bool allow)
         {
+            if (host.Length <= 1) return false;
             return adf_host(handle, host, host.Length, true, allow);
         }
 
         public bool DelHost(string host,bool allow)
         {
+            if (host.Length <= 1) return false;
             return adf_host(handle, host, host.Length, false, allow);
         }
 

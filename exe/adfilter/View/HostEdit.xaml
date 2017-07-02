@@ -6,8 +6,44 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid ItemsSource="{Binding Hosts}">
-            
+        
+        <Grid.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource AccentedSquareButtonStyle}">
+            </Style>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <DataGrid ItemsSource="{Binding Hosts}" 
+                  AutoGenerateColumns="False" 
+                  Name="grid"
+                  VerticalAlignment="Stretch"
+                  Grid.Row="0"
+                  HeadersVisibility="None"
+                  CanUserAddRows="True"
+                  IsReadOnly="False"
+                  BeginningEdit="grid_BeginningEdit">
+            <DataGrid.Columns>
+                
+                <DataGridTextColumn Header="Host" Width="*" Binding="{Binding Host}">
+                    <DataGridTextColumn.EditingElementStyle>
+                        <Style TargetType="TextBox">
+                            <EventSetter Event="LostFocus" Handler="s_LostFocus"/>
+                        </Style>
+                    </DataGridTextColumn.EditingElementStyle>
+                </DataGridTextColumn>
+                
+            </DataGrid.Columns>
         </DataGrid>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button Content="+" Width="30"
+                                    Click="Add_Click"/>
+            <Button Content="-" Width="30"
+                                    Click="Del_Click"/>
+        </StackPanel>
     </Grid>
 </UserControl>
