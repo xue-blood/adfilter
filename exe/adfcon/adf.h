@@ -57,8 +57,8 @@ ADF_API bool	adf_get_pause(HANDLE h);
 
 ADF_API bool	adf_host(HANDLE h, char* host, int len,bool add,bool except);
 
-ADF_API bool	adf_add_user_host(HANDLE h, char* host, int len);
-ADF_API bool	adf_del_user_host(HANDLE h, char* host, int len);
+#define adf_add_user_host(h,host,len) adf_host(h,host,len,1,0)
+#define adf_del_user_host(h,host,len) adf_host(h,host,len,0,0)
 
-ADF_API bool	adf_add_except_host(HANDLE h, char* host, int len);
-ADF_API bool	adf_del_except_host(HANDLE h, char* host, int len);
+#define adf_add_except_host(h,host,len) adf_host(h,host,len,1,1)
+#define adf_del_except_host(h,host,len) adf_host(h,host,len,0,1)
