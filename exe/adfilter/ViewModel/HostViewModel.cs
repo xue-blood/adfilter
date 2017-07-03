@@ -34,6 +34,10 @@ namespace adfilter.ViewModel
         #region function
         public void Add(string host)
         {
+            // is host already in list
+            if (Hosts.Find(x => x.Host == host) != null)
+                return;
+
             if (AddHost(host))
                 Hosts.Add(new HostList(host));
         }
