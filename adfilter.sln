@@ -181,9 +181,9 @@ Global
 		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Win8.1 Release|Win32.ActiveCfg = Release|Any CPU
 		{E41DC42B-3D4C-40A7-9E6C-285939C88A04}.Win8.1 Release|x64.ActiveCfg = Release|Any CPU
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Any CPU.ActiveCfg = Win8 Release|Win32
-		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Mixed Platforms.ActiveCfg = Win8 Release|Win32
-		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Mixed Platforms.Build.0 = Win8 Release|Win32
-		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Mixed Platforms.Deploy.0 = Win8 Release|Win32
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Mixed Platforms.ActiveCfg = Win7 Debug|Win32
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Mixed Platforms.Build.0 = Win7 Debug|Win32
+		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Mixed Platforms.Deploy.0 = Win7 Debug|Win32
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Win32.ActiveCfg = Win8 Release|Win32
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Win32.Build.0 = Win8 Release|Win32
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Debug(dll)|Win32.Deploy.0 = Win8 Release|Win32
@@ -270,9 +270,9 @@ Global
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Win8.1 Release|x64.Build.0 = Win8.1 Release|x64
 		{E41842B6-3E8B-476C-AA59-BBC98BCFA547}.Win8.1 Release|x64.Deploy.0 = Win8.1 Release|x64
 		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Any CPU.ActiveCfg = Win8 Release|Win32
-		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Mixed Platforms.ActiveCfg = Win8 Release|Win32
-		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Mixed Platforms.Build.0 = Win8 Release|Win32
-		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Mixed Platforms.Deploy.0 = Win8 Release|Win32
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Mixed Platforms.ActiveCfg = Win7 Debug|Win32
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Mixed Platforms.Build.0 = Win7 Debug|Win32
+		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Mixed Platforms.Deploy.0 = Win7 Debug|Win32
 		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Win32.ActiveCfg = Win8 Release|Win32
 		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Win32.Build.0 = Win8 Release|Win32
 		{5671BBFE-6F3E-455E-B3F0-A993DDA2856A}.Debug(dll)|Win32.Deploy.0 = Win8 Release|Win32

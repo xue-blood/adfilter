@@ -23,38 +23,43 @@ namespace adfilter.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
 
+        public List<HostList> Hosts { get; set; }
 
         protected abstract bool AddHost(string host);
 
         protected abstract bool DelHost(string host);
 
-        public List<HostList> Hosts { get; set; }
-
         protected abstract string RegKey { get; }
 
-        private ICommand addCommand;
-        public ICommand AddCommand
+        #region function
+        public void Add(string host)
         {
-            get
-            {
-                return addCommand ?? (addCommand = new BaseCommand
-                    {
-                        ExecuteDelegate = x => AddHost(x.ToString())
-                    });
-            }
+            if (AddHost(host))
+                Hosts.Add(new HostList(host));
         }
 
-        private ICommand delCommand;
-        public ICommand DelCommand
+        public void Del(string host)
         {
-            get
-            {
-                return delCommand ?? (delCommand = new BaseCommand
-                    {
-                        ExecuteDelegate = x => DelHost(x.ToString())
-                    });
-            }
+            if (Hosts.Count == 0) return;
+
+            // find host index
+            int index = Hosts.FindIndex(x => x.Host == host);
+
+            if (DelHost(Hosts[index].Host))
+                Hosts.RemoveAt(index);
         }
+
+        public void Del(int index)
+        {
+            if (index < 0 || index > Hosts.Count - 1) return;
+
+            if (Hosts.Count == 0) return;
+
+
+            if (DelHost(Hosts[index].Host))
+                Hosts.RemoveAt(index);
+        }
+
 
         string GetFilePath()
         {
@@ -106,6 +111,8 @@ namespace adfilter.ViewModel
                 MessageBox.Show(e.Message);
             }
         }
+
+        #endregion
     }
 
     class WhiteHostViewModel : HostViewModel

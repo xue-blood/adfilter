@@ -58,6 +58,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug(dll)|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <TargetExt>.dll</TargetExt>
+    <TargetName>adf</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

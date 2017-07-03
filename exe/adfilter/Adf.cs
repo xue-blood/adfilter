@@ -11,24 +11,24 @@ namespace adfilter
     {
 
         #region c function
-        [DllImport("adfcon.dll")]
+        [DllImport("adf.dll")]
         static extern IntPtr adf_open();
 
-        [DllImport("adfcon.dll")]
+        [DllImport("adf.dll")]
         static extern void adf_close(IntPtr handle);
 
-        [DllImport("adfcon.dll")]
+        [DllImport("adf.dll")]
         static extern bool adf_set_pause(IntPtr handle, bool pause);
 
-        [DllImport("adfcon.dll")]
+        [DllImport("adf.dll")]
         static extern bool adf_get_pause(IntPtr handle);
 
-        [DllImport("adfcon.dll")]
+        [DllImport("adf.dll")]
         static extern bool adf_install();
-        [DllImport("adfcon.dll")]
+        [DllImport("adf.dll")]
         static extern bool adf_remove();
 
-        [DllImport("adfcon.dll")]
+        [DllImport("adf.dll")]
         static extern bool adf_host(IntPtr handle, [MarshalAs(UnmanagedType.LPStr)] string host, int host_len, bool add, bool except);
 
 

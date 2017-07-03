@@ -34,6 +34,8 @@ namespace adfilter.View
 
         }
 
+        HostViewModel vm { get { return this.DataContext as HostViewModel; } }
+
         void Dispatcher_ShutdownStarted(object sender, EventArgs e)
         {
             ((IDisposable)this.DataContext).Dispose();
@@ -42,24 +44,32 @@ namespace adfilter.View
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            HostViewModel vm = this.DataContext as HostViewModel;
-            vm.Hosts.Add(new HostList(""));
-
+            //HostViewModel vm = this.DataContext as HostViewModel;
+            vm.Add(input.Text);
+            
             this.grid.SelectedIndex = vm.Hosts.Count -1;
             this.grid.Items.Refresh();
 
         }
 
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            string host = input.Text;
+            if (host == "") return;
+
+            this.grid.SelectedIndex = vm.Hosts.FindIndex(x => x.Host == host);
+        }
 
         private void Del_Click(object sender, RoutedEventArgs e)
         {
-            if (grid.SelectedItem == null) return;
-
-            HostViewModel vm = this.DataContext as HostViewModel;
-            vm.Hosts.RemoveAt(this.grid.SelectedIndex);
-            string host = (grid.SelectedItem as HostList).Host;
-
-            vm.DelCommand.Execute(host);
+            if (grid.SelectedItem != null)
+            {
+                vm.Del(grid.SelectedIndex);
+            }
+            else if(input.Text != "")
+            {
+                vm.Del(input.Text);
+            }
 
             // refresh view after delete
             // see:https://stackoverflow.com/questions/930350/how-to-refresh-a-wpf-datagrid
@@ -75,9 +85,9 @@ namespace adfilter.View
 
             HostViewModel vm = this.DataContext as HostViewModel;
             // delete org host
-            vm.DelCommand.Execute(org_host);
+            vm.Del(org_host);
             // add new host
-            vm.AddCommand.Execute(new_host);
+            vm.Add(new_host);
         }
 
         private void grid_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)

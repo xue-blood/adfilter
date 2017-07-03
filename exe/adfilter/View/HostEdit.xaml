@@ -9,19 +9,34 @@
         
         <Grid.Resources>
             <Style TargetType="Button" BasedOn="{StaticResource AccentedSquareButtonStyle}">
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+                <Setter Property="Width" Value="30"/>
             </Style>
         </Grid.Resources>
         
         <Grid.RowDefinitions>
-            <RowDefinition />
             <RowDefinition Height="Auto"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
-        
+
+        <DockPanel >
+            
+            <Button Content="" Click="Del_Click"
+                    DockPanel.Dock="Right"/>
+            
+            <Button Content="" Click="Search_Click"
+                    DockPanel.Dock="Right"/>
+            
+            <Button Content="" Click="Add_Click"
+                    DockPanel.Dock="Right"/>
+            <TextBox Name="input"/>
+        </DockPanel>
+
         <DataGrid ItemsSource="{Binding Hosts}" 
                   AutoGenerateColumns="False" 
                   Name="grid"
                   VerticalAlignment="Stretch"
-                  Grid.Row="0"
+                  Grid.Row="1"
                   HeadersVisibility="None"
                   CanUserAddRows="True"
                   IsReadOnly="False"
@@ -39,11 +54,6 @@
             </DataGrid.Columns>
         </DataGrid>
         
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button Content="+" Width="30"
-                                    Click="Add_Click"/>
-            <Button Content="-" Width="30"
-                                    Click="Del_Click"/>
-        </StackPanel>
+        
     </Grid>
 </UserControl>
