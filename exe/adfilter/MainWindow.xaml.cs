@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using adfilter.Model;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +26,18 @@ namespace adfilter
         {
             InitializeComponent();
 
-            if(Adf.Instance.Invalid)
+            this.Loaded += MainWindow_Loaded;
+            Msg.Instance.MsgHost = msg;
+        }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Adf.Instance.Invalid)
             {
-                MessageBox.Show("Open device failed.");
-                App.Current.Shutdown();
+                Msg.Instance.Show("connect to driver failed.");
             }
+            Msg.Instance.Show("connect to driver success.");
+
         }
 
         private void HamburgerMenu_ItemClick(object sender, ItemClickEventArgs e)

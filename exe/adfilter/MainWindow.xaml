@@ -5,6 +5,7 @@
         xmlns:view="clr-namespace:adfilter.View"
         Title="MainWindow" Height="600" Width="450"
         Style="{StaticResource WindowStyle}">
+    
     <Grid>
         <ui:HamburgerMenu ItemClick="HamburgerMenu_ItemClick"
                           OptionsItemClick="HamburgerMenu_ItemClick"
@@ -36,5 +37,40 @@
                 </ui:HamburgerMenuItemCollection>
             </ui:HamburgerMenu.OptionsItemsSource>
         </ui:HamburgerMenu>
+        <TextBlock Name="msg" Text="msg"
+                   FontSize="27" Foreground="Cyan"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                   Margin="10"
+                   IsHitTestVisible="False">
+            <TextBlock.RenderTransform>
+                <TranslateTransform x:Name="msg_pos"/>
+            </TextBlock.RenderTransform>
+            <TextBlock.Resources>
+                <Storyboard x:Key="Msg_Amimate">
+                    <DoubleAnimationUsingKeyFrames 
+                        Storyboard.TargetProperty="(UIElement.Opacity)">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.267" Value="1"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.667" Value="1"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.967" Value="0"/>
+                    </DoubleAnimationUsingKeyFrames>
+
+                    <!-- move animate 
+                    see : https://stackoverflow.com/questions/10499357/is-there-a-way-to-animate-the-margin-property-in-metro-style-apps
+                    -->
+                    <DoubleAnimationUsingKeyFrames 
+                        Storyboard.TargetProperty="X"
+                        Storyboard.TargetName="msg_pos">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="-10"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.267" Value="-4"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.667" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.967" Value="18"/>
+                    </DoubleAnimationUsingKeyFrames>
+
+
+                </Storyboard>
+                
+            </TextBlock.Resources>
+        </TextBlock>
     </Grid>
 </ui:MetroWindow>

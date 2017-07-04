@@ -82,6 +82,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\HostList.cs" />
+    <Compile Include="Model\Msg.cs" />
     <Compile Include="ViewModel\DriverViewModel.cs" />
     <Compile Include="Model\BaseCommand.cs" />
     <Compile Include="ViewModel\HostViewModel.cs" />
