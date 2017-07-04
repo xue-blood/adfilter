@@ -28,7 +28,11 @@ namespace adfilter.ViewModel
             {
                 return startCommand ?? (startCommand = new BaseCommand
                 {
-                    ExecuteDelegate = x => Adf.Instance.Pause = false
+                    ExecuteDelegate = x => 
+                        {
+                            Adf.Instance.Pause = false;
+                            Msg.Instance.Show("Driver started");
+                        }
                 });
             }
         }
@@ -40,7 +44,11 @@ namespace adfilter.ViewModel
             {
                 return stopCommand ?? (stopCommand = new BaseCommand
                     {
-                        ExecuteDelegate = x=> Adf.Instance.Pause = true
+                        ExecuteDelegate = x =>
+                        {
+                            Adf.Instance.Pause = true;
+                            Msg.Instance.Show("Driver stopped");
+                        }
                     });
             }
         }

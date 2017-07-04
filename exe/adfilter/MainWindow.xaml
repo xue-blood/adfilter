@@ -61,9 +61,9 @@
                     <DoubleAnimationUsingKeyFrames 
                         Storyboard.TargetProperty="X"
                         Storyboard.TargetName="msg_pos">
-                        <EasingDoubleKeyFrame KeyTime="0" Value="-10"/>
+                        <EasingDoubleKeyFrame KeyTime="0" Value="-18"/>
                         <EasingDoubleKeyFrame KeyTime="0:0:0.267" Value="-4"/>
-                        <EasingDoubleKeyFrame KeyTime="0:0:0.667" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.667" Value="4"/>
                         <EasingDoubleKeyFrame KeyTime="0:0:0.967" Value="18"/>
                     </DoubleAnimationUsingKeyFrames>
 

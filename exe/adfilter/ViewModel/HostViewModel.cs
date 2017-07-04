@@ -34,12 +34,24 @@ namespace adfilter.ViewModel
         #region function
         public void Add(string host)
         {
+            // check is a valid host name
+            if( !CheckHost(host))
+            {
+                Msg.Instance.Show("please input a valid host name");
+                return;
+            }
+
             // is host already in list
             if (Hosts.Find(x => x.Host == host) != null)
+            {
+                Msg.Instance.Show("host is already in the list");
                 return;
+            }
 
             if (AddHost(host))
                 Hosts.Add(new HostList(host));
+
+            Msg.Instance.Show("add host success");
         }
 
         public void Del(string host)
@@ -48,9 +60,12 @@ namespace adfilter.ViewModel
 
             // find host index
             int index = Hosts.FindIndex(x => x.Host == host);
+            if (index < 0 || index > Hosts.Count - 1) return;
 
             if (DelHost(Hosts[index].Host))
                 Hosts.RemoveAt(index);
+
+            Msg.Instance.Show("delete host success");
         }
 
         public void Del(int index)
@@ -62,8 +77,16 @@ namespace adfilter.ViewModel
 
             if (DelHost(Hosts[index].Host))
                 Hosts.RemoveAt(index);
+
+            Msg.Instance.Show("delete host success");
         }
 
+        bool CheckHost(string host)
+        {
+            if (host.Split('.').Length == 1) return false;
+
+            return true;
+        }
 
         string GetFilePath()
         {

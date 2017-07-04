@@ -12,7 +12,7 @@
     </UserControl.DataContext>
     <Grid>
 
-        <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="20">
             <ui:Tile Title="Start"
                  Command="{Binding StartCommand}"/>
             <ui:Tile Title="Stop" 
