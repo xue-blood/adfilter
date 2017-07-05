@@ -23,10 +23,6 @@ namespace adfilter
         [DllImport("adf.dll")]
         static extern bool adf_get_pause(IntPtr handle);
 
-        [DllImport("adf.dll")]
-        static extern bool adf_install();
-        [DllImport("adf.dll")]
-        static extern bool adf_remove();
 
         [DllImport("adf.dll")]
         static extern bool adf_host(IntPtr handle, [MarshalAs(UnmanagedType.LPStr)] string host, int host_len, bool add, bool except);

@@ -34,7 +34,7 @@ namespace adfilter
         {
             if (Adf.Instance.Invalid)
             {
-                Msg.Instance.Show("connect to driver failed.");
+                Msg.Instance.Show("connect to driver failed.",true);
             }
             Msg.Instance.Show("connect to driver success.");
 

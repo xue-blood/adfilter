@@ -86,14 +86,3 @@ ADF_API bool	adf_host(HANDLE h, char* host, int len, bool add, bool except)
 
 	return status;
 }
-
-
-ADF_API bool	adf_install()
-{
-	return system("install.bat");
-}
-
-ADF_API bool	adf_remove()
-{
-	return system("remove.bat");
-}

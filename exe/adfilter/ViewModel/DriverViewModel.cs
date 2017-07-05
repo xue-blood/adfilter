@@ -47,7 +47,7 @@ namespace adfilter.ViewModel
                         ExecuteDelegate = x =>
                         {
                             Adf.Instance.Pause = true;
-                            Msg.Instance.Show("Driver stopped");
+                            Msg.Instance.Show("Driver stopped",true);
                         }
                     });
             }

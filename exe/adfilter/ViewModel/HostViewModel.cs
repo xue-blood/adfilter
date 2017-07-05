@@ -37,14 +37,14 @@ namespace adfilter.ViewModel
             // check is a valid host name
             if( !CheckHost(host))
             {
-                Msg.Instance.Show("please input a valid host name");
+                Msg.Instance.Show("please input a valid host name",true);
                 return;
             }
 
             // is host already in list
             if (Hosts.Find(x => x.Host == host) != null)
             {
-                Msg.Instance.Show("host is already in the list");
+                Msg.Instance.Show("host is already in the list",true);
                 return;
             }
 

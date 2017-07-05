@@ -38,15 +38,20 @@
             </ui:HamburgerMenu.OptionsItemsSource>
         </ui:HamburgerMenu>
         <TextBlock Name="msg" Text="msg"
-                   FontSize="27" Foreground="Cyan"
+                   FontSize="27"
                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                   Margin="10"
+                   Margin="20"
                    IsHitTestVisible="False">
             <TextBlock.RenderTransform>
                 <TranslateTransform x:Name="msg_pos"/>
             </TextBlock.RenderTransform>
+            
+            <TextBlock.Foreground>
+                <SolidColorBrush x:Name="msg_fore_color" Color="Cyan"/>
+            </TextBlock.Foreground>
+            
             <TextBlock.Resources>
-                <Storyboard x:Key="Msg_Amimate">
+                <Storyboard x:Key="Msg_Animate">
                     <DoubleAnimationUsingKeyFrames 
                         Storyboard.TargetProperty="(UIElement.Opacity)">
                         <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -68,8 +73,46 @@
                     </DoubleAnimationUsingKeyFrames>
 
 
+                    <ColorAnimationUsingKeyFrames 
+                        Storyboard.TargetName="msg_fore_color"
+                        Storyboard.TargetProperty="Color">
+                        <EasingColorKeyFrame KeyTime="0" Value="Cyan"/>
+                    </ColorAnimationUsingKeyFrames>
+
                 </Storyboard>
-                
+
+                <Storyboard x:Key="Msg_Animate_Warring">
+                    <DoubleAnimationUsingKeyFrames 
+                        Storyboard.TargetProperty="(UIElement.Opacity)">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.267" Value="1"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.667" Value="1"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:1.967" Value="0"/>
+                    </DoubleAnimationUsingKeyFrames>
+
+                    <!-- move animate 
+                    see : https://stackoverflow.com/questions/10499357/is-there-a-way-to-animate-the-margin-property-in-metro-style-apps
+                    -->
+                    <DoubleAnimationUsingKeyFrames 
+                        Storyboard.TargetProperty="Y"
+                        Storyboard.TargetName="msg_pos">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="18"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.267" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.667" Value="4"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:1.967" Value="4"/>
+                    </DoubleAnimationUsingKeyFrames>
+
+                    <ColorAnimationUsingKeyFrames 
+                        Storyboard.TargetName="msg_fore_color"
+                        Storyboard.TargetProperty="Color">
+                        <EasingColorKeyFrame KeyTime="0" Value="Crimson"/>
+                        <EasingColorKeyFrame KeyTime="0:0:1.967" Value="Crimson"/>
+                        <EasingColorKeyFrame KeyTime="2" Value="Cyan"/>
+                    </ColorAnimationUsingKeyFrames>
+
+                </Storyboard>
+
+
             </TextBlock.Resources>
         </TextBlock>
     </Grid>

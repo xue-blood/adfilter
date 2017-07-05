@@ -18,10 +18,11 @@ namespace adfilter.Model
         }
 
         public TextBlock MsgHost { get; set; }
-        public void Show(string msg)
+        public void Show(string msg,bool warring = false)
         {
             MsgHost.Text = msg;
-            Storyboard sb = MsgHost.Resources["Msg_Amimate"] as Storyboard;
+            string key = warring ? "Msg_Animate_Warring" : "Msg_Animate";
+            Storyboard sb = MsgHost.Resources[key] as Storyboard;
             if (sb != null)
                 MsgHost.BeginStoryboard(sb);
         }
