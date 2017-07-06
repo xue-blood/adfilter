@@ -109,7 +109,7 @@ Section "MainSection" SEC01
 
   ;font
   ; see:https://superuser.com/questions/201896/how-do-i-install-a-font-from-the-windows-command-prompt
-   ;IfFileExists "$FONTS\segmdl2.ttf" Continue InstallFont
+   IfFileExists "$FONTS\segmdl2.ttf" Continue InstallFont
 InstallFont:
   DetailPrint "install font"
   SetOutPath "$FONTS"
