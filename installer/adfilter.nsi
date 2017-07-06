@@ -107,7 +107,16 @@ Section "MainSection" SEC01
   CreateShortCut "$DESKTOP\adfilter.lnk" "$INSTDIR\adfilter.exe"
   File "res\adf.dll"
 
+  ;font
+  ; see:https://superuser.com/questions/201896/how-do-i-install-a-font-from-the-windows-command-prompt
+   ;IfFileExists "$FONTS\segmdl2.ttf" Continue InstallFont
+InstallFont:
+  DetailPrint "install font"
+  SetOutPath "$FONTS"
   File "res\segmdl2.ttf"
+  nsExec::Exec "reg add $\"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts$\" /v $\"Segoe MDL2 Assets (TrueType)$\" /t REG_SZ /d segmdl2.ttf /f"
+Continue:
+  # Continue in installation...
   
   ; install driver
   DetailPrint "install driver..."
