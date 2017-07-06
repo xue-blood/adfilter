@@ -41,6 +41,7 @@
                    FontSize="27"
                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
                    Margin="20"
+                   Opacity="0"
                    IsHitTestVisible="False">
             <TextBlock.RenderTransform>
                 <TranslateTransform x:Name="msg_pos"/>

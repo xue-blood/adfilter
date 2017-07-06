@@ -26,19 +26,15 @@ namespace adfilter
         {
             InitializeComponent();
 
-            this.Loaded += MainWindow_Loaded;
+            if (Adf.Instance.Invalid)
+            {
+                MessageBox.Show("Open device failed.");
+                App.Current.Shutdown();
+            }
+
             Msg.Instance.MsgHost = msg;
         }
 
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (Adf.Instance.Invalid)
-            {
-                Msg.Instance.Show("connect to driver failed.",true);
-            }
-            Msg.Instance.Show("connect to driver success.");
-
-        }
 
         private void HamburgerMenu_ItemClick(object sender, ItemClickEventArgs e)
         {

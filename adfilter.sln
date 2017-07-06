@@ -17,7 +17,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "adfilter", "sys\adfilter\ad
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "installer", "installer", "{362CDAE6-FAE3-4C54-A840-5808136FEE9E}"
 	ProjectSection(SolutionItems) = preProject
-		installer\adfilter-x64.nsi = installer\adfilter-x64.nsi
 		installer\adfilter.nsi = installer\adfilter.nsi
 	EndProjectSection
 EndProject

@@ -2,7 +2,6 @@ editor
 ======
 * [visual studio code](https://code.visualstudio.com) + NSIS(externsion)
 * [Unicode NSIS](http://www.scratchpaper.com)
-* [FontName](http://nsis.sourceforge.net/FontName_plug-in)
 
 build
 =====

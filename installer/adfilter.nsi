@@ -10,7 +10,7 @@
 ; MUI 1.67 compatible ------
 !include "MUI.nsh"
 
-!include "LogicLib.nsh"
+!include "x64.nsh"
 
 ; MUI Settings
 !define MUI_ABORTWARNING
@@ -90,14 +90,7 @@ FunctionEnd
 ; net 4.5 end
 
 Section "MainSection" SEC01
-  ; install driver
-  File "/oname=C:\Windows\System32\Drivers\adfilter.sys" "res\adfilter.sys"
-  nsExec::Exec "sc create adfilter binpath= system32\drivers\adfilter.sys start= auto type= kernel"
-  WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\services\adfilter" "Pause" "0"
-  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "SysFilePath" "$INSTDIR\sys.txt"
-  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "UserFilePath" "$INSTDIR\user.txt"
-  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "ExceptFilePath" "$INSTDIR\except.txt"
-  nsExec::Exec "net start adfilter"
+  
   
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
@@ -113,9 +106,30 @@ Section "MainSection" SEC01
   CreateShortCut "$SMPROGRAMS\adfilter\adfilter.lnk" "$INSTDIR\adfilter.exe"
   CreateShortCut "$DESKTOP\adfilter.lnk" "$INSTDIR\adfilter.exe"
   File "res\adf.dll"
+
+  File "res\segmdl2.ttf"
   
+  ; install driver
+  DetailPrint "install driver..."
+  ; x64 :https://stackoverflow.com/questions/13229212/how-to-detect-windows-32bit-or-64-bit-using-nsis-script
+  ${If} ${RunningX64}
+    DetailPrint "64-bit Windows"
+    File "/oname=C:\Windows\System32\Drivers\adfilter.sys" "res\adfilter64.sys"    
+  ${Else}
+    DetailPrint "32-bit Windows"
+    File "/oname=C:\Windows\System32\Drivers\adfilter.sys" "res\adfilter.sys"    
+  ${EndIf} 
+  nsExec::Exec "sc create adfilter binpath= system32\drivers\adfilter.sys start= auto type= kernel"
+  WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\services\adfilter" "Pause" "0"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "SysFilePath" "$INSTDIR\sys.txt"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "UserFilePath" "$INSTDIR\user.txt"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "ExceptFilePath" "$INSTDIR\except.txt"
+  nsExec::Exec "net start adfilter"
+
   ; check net 4.5
   Call CheckAndInstallDotNet
+
+
 SectionEnd
 
 
@@ -148,10 +162,6 @@ Function un.onInit
 FunctionEnd
 
 Section Uninstall
-  ;uninstall driver
-  Delete "C:\Windows\System32\Drivers\adfilter.sys"
-  nsExec::Exec "sc delete adfilter"
-
   Delete "$INSTDIR\uninst.exe"
   Delete "$INSTDIR\dotNetFx45_Full_setup.exe"
   Delete "$INSTDIR\adf.dll"
@@ -160,15 +170,29 @@ Section Uninstall
   Delete "$INSTDIR\sys.txt"
   Delete "$INSTDIR\user.txt"
 
+  Delete "$INSTDIR\adfcon.exe"
+  Delete "$INSTDIR\MahApps.Metro.dll"
+  Delete "$INSTDIR\System.Windows.Interactivity.dll"
+
   Delete "$SMPROGRAMS\adfilter\Uninstall.lnk"
   Delete "$DESKTOP\adfilter.lnk"
   Delete "$SMPROGRAMS\adfilter\adfilter.lnk"
+  Delete "$INSTDIR\segmdl2.ttf"
+
 
   RMDir "$SMPROGRAMS\adfilter"
   RMDir "$INSTDIR"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
+
+  
+  ;uninstall driver
+  Delete "C:\Windows\System32\Drivers\adfilter.sys"
+  nsExec::Exec "sc delete adfilter"
+
+    MessageBox MB_YESNO|MB_ICONQUESTION "You reboot the system to finish uninstall." IDNO +2
+    Reboot
   SetAutoClose true
 SectionEnd
 ; uninstall end
