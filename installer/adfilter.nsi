@@ -46,7 +46,7 @@
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "Setup.exe"
+OutFile "adfilter.exe"
 InstallDir "$PROGRAMFILES\adfilter"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
@@ -76,7 +76,9 @@ Function CheckAndInstallDotNet
         DetailPrint "Installing Microsoft .NET Framework 4.5"
         File "res\dotNetFx45_Full_setup.exe"        
         SetDetailsPrint listonly
-        ExecWait '"$INSTDIR\dotNetFx45_Full_setup.exe" /passive /norestart' $0
+        
+        MessageBox MB_OK "Please Install Microsoft .NET Framework 4.5"
+        ExecWait '"$INSTDIR\dotNetFx45_Full_setup.exe"' $0
         ${If} $0 == 3010 
         ${OrIf} $0 == 1641
             DetailPrint "Microsoft .NET Framework 4.5 installer requested reboot"
@@ -98,7 +100,6 @@ Section "MainSection" SEC01
   File "res\sys.txt"
   File "res\except.txt"
   
-  File "res\adfcon.exe"
   File "res\adfilter.exe"
   File "res\MahApps.Metro.dll"
   File "res\System.Windows.Interactivity.dll"
@@ -179,7 +180,7 @@ Section Uninstall
   Delete "$INSTDIR\sys.txt"
   Delete "$INSTDIR\user.txt"
 
-  Delete "$INSTDIR\adfcon.exe"
+
   Delete "$INSTDIR\MahApps.Metro.dll"
   Delete "$INSTDIR\System.Windows.Interactivity.dll"
 
