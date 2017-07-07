@@ -202,6 +202,9 @@
     <Link>
       <AdditionalDependencies>tdi.lib;tdi_fw.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(OutDir)adfilter.sys" "$(SolutionDir)installer\res\adfilter.sys" /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <FilesToPackage Include="$(TargetPath)" />

@@ -6,6 +6,10 @@
 *.user
 *.sln.docstates
 
+*.exe
+*.sys
+*.dll
+
 # Build results
 [Dd]ebug/
 [Dd]ebug(dll)/

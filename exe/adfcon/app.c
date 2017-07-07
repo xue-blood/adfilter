@@ -9,7 +9,6 @@ void promot()
 {
 	char s[] = \
 "Usage:\n\
-	adfcon install/remove : install or remove the driver.\n\
 	adfcon start/stop	: start or stop the driver.\n\
 	adfcon show		: show the status of driver.\n\
 	adfcon add/del (hostname): add or delete host.\n\
@@ -37,11 +36,6 @@ int main(int argc, char** argv)
 	do 
 	{
 		// argc == 2
-		Cmd("install",	adf_install());
-		Cmd("remove",	adf_remove());
-	
-
-
 		h = adf_open();
 		printf("open device %s\n", h == INVALID_HANDLE_VALUE ? "failed." : "success.");
 		if (h == INVALID_HANDLE_VALUE) return -1;
