@@ -74,10 +74,9 @@ Function CheckAndInstallDotNet
     ${Else}
     NotDetected:
         DetailPrint "Installing Microsoft .NET Framework 4.5"
-        File "res\dotNetFx45_Full_setup.exe"        
         SetDetailsPrint listonly
         
-        MessageBox MB_OK "Please Install Microsoft .NET Framework 4.5"
+        ;MessageBox MB_OK "Please Install Microsoft .NET Framework 4.5"
         ExecWait '"$INSTDIR\dotNetFx45_Full_setup.exe"' $0
         ${If} $0 == 3010 
         ${OrIf} $0 == 1641
@@ -99,6 +98,8 @@ Section "MainSection" SEC01
   File "res\user.txt"
   File "res\sys.txt"
   File "res\except.txt"
+        
+  File "res\dotNetFx45_Full_setup.exe"        
   
   File "res\adfilter.exe"
   File "res\MahApps.Metro.dll"
