@@ -132,12 +132,15 @@ Continue:
     !endif
 
     DetailPrint "64-bit Windows"
-    File "/oname=C:\Windows\System32\Drivers\adfilter.sys" "res\adfilter64.sys"    
+    File "/oname=C:\Windows\system32\Drivers\adfilter.sys" "res\adfilter64.sys"    
+    nsExec::Exec "sc create adfilter binpath= SysWOW64\drivers\adfilter.sys start= auto type= kernel"
   ${Else}
     DetailPrint "32-bit Windows"
     File "/oname=C:\Windows\System32\Drivers\adfilter.sys" "res\adfilter.sys"    
+    nsExec::Exec "sc create adfilter binpath= system32\drivers\adfilter.sys start= auto type= kernel"
   ${EndIf} 
-  nsExec::Exec "sc create adfilter binpath= system32\drivers\adfilter.sys start= auto type= kernel"
+  
+
   WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\services\adfilter" "Pause" "0"
   WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "SysFilePath" "$INSTDIR\sys.txt"
   WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "UserFilePath" "$INSTDIR\user.txt"
