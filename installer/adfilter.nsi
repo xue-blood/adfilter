@@ -124,6 +124,17 @@ Continue:
   
   ; install driver
   DetailPrint "install driver..."
+
+  
+  WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\services\adfilter" "Pause" "0"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "SysFilePath" "$INSTDIR\sys.txt"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "UserFilePath" "$INSTDIR\user.txt"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "ExceptFilePath" "$INSTDIR\except.txt"
+  
+
+  !ifdef DEBUG
+  MessageBox MB_OK "install driver now"
+  !endif
   ; x64 :https://stackoverflow.com/questions/13229212/how-to-detect-windows-32bit-or-64-bit-using-nsis-script
   ${If} ${RunningX64}
     !ifdef DEBUG
@@ -140,12 +151,7 @@ Continue:
     nsExec::Exec "sc create adfilter binpath= system32\drivers\adfilter.sys start= auto type= kernel"
   ${EndIf} 
   
-
-  WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\services\adfilter" "Pause" "0"
-  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "SysFilePath" "$INSTDIR\sys.txt"
-  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "UserFilePath" "$INSTDIR\user.txt"
-  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "ExceptFilePath" "$INSTDIR\except.txt"
-  nsExec::Exec "net start adfilter"
+nsExec::Exec "net start adfilter"
 
   ; check net 4.5
   Call CheckAndInstallDotNet

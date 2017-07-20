@@ -1,6 +1,7 @@
 # ADFilter
 Filter AD in windows kernel.
 
+![demo](https://user-images.githubusercontent.com/18024882/28399960-dc6acb18-6d42-11e7-9725-dc71e34e7927.png)
 
 ## How to use
 just add host any you want to filter.
