@@ -127,9 +127,9 @@ Continue:
 
   
   WriteRegDWORD HKLM "SYSTEM\CurrentControlSet\services\adfilter" "Pause" "0"
-  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "SysFilePath" "$INSTDIR\sys.txt"
-  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "UserFilePath" "$INSTDIR\user.txt"
-  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "ExceptFilePath" "$INSTDIR\except.txt"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "SysFilePath" "\??\$INSTDIR\sys.txt"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "UserFilePath" "\??\$INSTDIR\user.txt"
+  WriteRegStr HKLM "SYSTEM\CurrentControlSet\services\adfilter" "ExceptFilePath" "\??\$INSTDIR\except.txt"
   
 
   !ifdef DEBUG
