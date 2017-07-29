@@ -1,5 +1,5 @@
 #include "adfilter.h"
-
+#include "slre.h"
 
 bool isSameHost(PLIST_ENTRY entry, char *name, int len)
 {
@@ -90,4 +90,23 @@ void clearHostList(PLIST_ENTRY header)
 		ExFreePoolWithTag(CONTAINING_RECORD(entry, HostList, list)->name.Buffer, MEM);
 		ExFreePoolWithTag(entry, MEM);
 	}
+}
+
+/*
+ *	try to match host in list use regular expersion
+ */
+bool isMatchHostList(PLIST_ENTRY header, char* dst, int len)
+{
+	for (PLIST_ENTRY h = header->Blink;
+		h != header;
+		h = h->Blink)
+	{
+		char* reg = CONTAINING_RECORD(h, HostList, list)->name.Buffer;
+
+		// match it
+		if( slre_match(reg, dst, len, NULL, 0, SLRE_IGNORE_CASE) == len)
+			return true;
+	}
+
+	return false;
 }

@@ -23,3 +23,9 @@ This is repository contain those projects:
     This is a WPF application for control the driver.(make sure it has administrator privalge)
 * [Installer](./installer)<br>
     You can use the nsis script use build a package for install and uninstall,for more information please see this [document](./installer/readme.md)
+
+## Update
+2017.7.29: 
+* add a project to build nsis installer in visual studio.
+* use Regular Expression [SLRE](https://github.com/cesanta/slre) replace the absolute compare.
+![regexp](./img/regexp.png)
