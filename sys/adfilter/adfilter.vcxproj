@@ -89,6 +89,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win7 Debug|Win32'">
     <ClCompile>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(SolutionDir)sys\slre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>tdi.lib;tdi_fw.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -100,6 +101,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win7 Debug|x64'">
     <ClCompile>
       <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(SolutionDir)sys\slre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>tdi_fw.lib;tdi.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -108,11 +110,25 @@
       <Command>copy "$(TargetPath)" "$(SolutionDir)installer\res\$(TargetFileName)" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win7 Release|Win32'">
+    <PostBuildEvent>
+      <Command>copy "$(OutDir)adfilter.sys" "$(SolutionDir)installer\res\adfilter.sys" /Y</Command>
+    </PostBuildEvent>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)sys\slre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win7 Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)sys\slre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <FilesToPackage Include="$(TargetPath)" />
     <FilesToPackage Include="@(Inf->'%(CopyOutput)')" Condition="'@(Inf)'!=''" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\slre\slre.c" />
     <ClCompile Include="adfilter.c" />
     <ClCompile Include="dispatch.c" />
     <ClCompile Include="filter.c" />
@@ -120,6 +136,7 @@
     <ClCompile Include="list.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\slre\slre.h" />
     <ClInclude Include="adfilter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

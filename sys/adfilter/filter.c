@@ -96,13 +96,13 @@ int filter(unsigned char *data, int len)
 	KeAcquireInStackQueuedSpinLock(&Adf.lock, &que);
 	
 	// search in except list
-	bool found = isInHostList(&Adf.AdHost.excpt, dns, dnslen);
+	bool found = isMatchHostList(&Adf.AdHost.excpt, dns, dnslen);
 	if (found) goto _found_in_except_;
 
-	found = isInHostList(&Adf.AdHost.user, dns, dnslen);
+	found = isMatchHostList(&Adf.AdHost.user, dns, dnslen);
 	if (found) goto _found_;
 
-	found = isInHostList(&Adf.AdHost.sys, dns, dnslen);
+	found = isMatchHostList(&Adf.AdHost.sys, dns, dnslen);
 	if (found) goto _found_;
 
 	goto _no_found_;

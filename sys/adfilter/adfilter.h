@@ -91,6 +91,7 @@ bool removeHostList(PLIST_ENTRY header, char* dst, int len);
 
 bool isSameHost(PLIST_ENTRY entry, char *name, int len);
 bool isInHostList(PLIST_ENTRY header, char* dst, int len);
+bool isMatchHostList(PLIST_ENTRY header, char* dst, int len);
 
 
 void clearHostList(PLIST_ENTRY header);
