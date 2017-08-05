@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:view="clr-namespace:adfilter.View"
+        xmlns:p="clr-namespace:adfilter.Properties"
         Title="MainWindow" Height="600" Width="450"
         Style="{StaticResource WindowStyle}">
     
@@ -12,13 +13,13 @@
                           SelectedIndex="1">
             <ui:HamburgerMenu.ItemsSource>
                 <ui:HamburgerMenuItemCollection>
-                    <ui:HamburgerMenuGlyphItem Glyph="" Label="Driver">
+                    <ui:HamburgerMenuGlyphItem Glyph="" Label="{x:Static p:Resources.label_driver}">
                         <ui:HamburgerMenuGlyphItem.Tag>
                             <view:Driver/>
                         </ui:HamburgerMenuGlyphItem.Tag>
                     </ui:HamburgerMenuGlyphItem>
 
-                    <ui:HamburgerMenuGlyphItem Glyph="" Label="Host">
+                    <ui:HamburgerMenuGlyphItem Glyph="" Label="{x:Static p:Resources.label_host}">
                         <ui:HamburgerMenuGlyphItem.Tag>
                             <view:Host/>
                         </ui:HamburgerMenuGlyphItem.Tag>

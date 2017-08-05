@@ -55,7 +55,11 @@
     <Text Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\exe\adfilter\properties\resources.designer.cs" />
     <None Include="adfilter.nsi" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\exe\adfilter\properties\resources.resx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

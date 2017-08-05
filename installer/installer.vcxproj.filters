@@ -5,5 +5,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="adfilter.nsi" />
+    <None Include="..\exe\adfilter\properties\resources.designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\exe\adfilter\properties\resources.resx" />
   </ItemGroup>
 </Project>

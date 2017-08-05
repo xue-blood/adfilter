@@ -6,12 +6,13 @@
              xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:vm="clr-namespace:adfilter.ViewModel"
              xmlns:view="clr-namespace:adfilter.View"
+             xmlns:p="clr-namespace:adfilter.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <ui:MetroAnimatedSingleRowTabControl SelectedIndex="0">
             
-            <TabItem Header="BlackList">
+            <TabItem Header="{x:Static p:Resources.title_black_list}">
                 <view:HostEdit >
                     <view:HostEdit.DataContext>
                         <vm:BlackHostViewModel/>
@@ -19,7 +20,7 @@
                 </view:HostEdit>
             </TabItem>
 
-            <TabItem Header="WhiteList">
+            <TabItem Header="{x:Static p:Resources.title_white_list}">
                 <view:HostEdit >
                     <view:HostEdit.DataContext>
                         <vm:WhiteHostViewModel/>

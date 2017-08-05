@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Res = adfilter.Properties.Resources;
 namespace adfilter
 {
     /// <summary>
@@ -28,8 +29,8 @@ namespace adfilter
 
             if (Adf.Instance.Invalid)
             {
-                MessageBox.Show("Open device failed.");
-                App.Current.Shutdown();
+                MessageBox.Show(Res.msg_driver_no_access);
+                //App.Current.Shutdown();
             }
 
             Msg.Instance.MsgHost = msg;

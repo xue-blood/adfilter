@@ -118,42 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label_driver" xml:space="preserve">
-    <value>driver</value>
+    <value>驱动</value>
   </data>
   <data name="label_host" xml:space="preserve">
-    <value>host</value>
+    <value>域名</value>
   </data>
   <data name="label_start" xml:space="preserve">
-    <value>Start</value>
+    <value>启动</value>
   </data>
   <data name="label_stop" xml:space="preserve">
-    <value>Stop</value>
+    <value>停止</value>
   </data>
   <data name="msg_driver_no_access" xml:space="preserve">
-    <value>Failed to connected driver!</value>
+    <value>无法访问驱动！</value>
   </data>
   <data name="msg_driver_started" xml:space="preserve">
-    <value>Driver started</value>
+    <value>驱动已启动</value>
   </data>
   <data name="msg_driver_stoped" xml:space="preserve">
-    <value>Driver stopped</value>
+    <value>驱动已停止</value>
   </data>
   <data name="msg_host_add" xml:space="preserve">
-    <value>add host success</value>
+    <value>添加域名成功</value>
   </data>
   <data name="msg_host_del" xml:space="preserve">
-    <value>delete host success</value>
+    <value>删除域名成功</value>
   </data>
   <data name="msg_host_exist" xml:space="preserve">
-    <value>host is already in the list</value>
+    <value>域名已存在</value>
   </data>
   <data name="msg_host_invalid" xml:space="preserve">
-    <value>please input a valid host name</value>
+    <value>请输入一个有效的域名</value>
   </data>
   <data name="title_black_list" xml:space="preserve">
-    <value>Black List</value>
+    <value>黑名单</value>
   </data>
   <data name="title_white_list" xml:space="preserve">
-    <value>White List</value>
+    <value>白名单</value>
   </data>
 </root>

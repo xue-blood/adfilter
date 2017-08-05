@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using adfilter.Model;
 using System.Windows.Input;
 
+using Res = adfilter.Properties.Resources;
+
 namespace adfilter.ViewModel
 {
     class DriverViewModel : INotifyPropertyChanged
@@ -31,7 +33,7 @@ namespace adfilter.ViewModel
                     ExecuteDelegate = x => 
                         {
                             Adf.Instance.Pause = false;
-                            Msg.Instance.Show("Driver started");
+                            Msg.Instance.Show(Res.msg_driver_started);
                         }
                 });
             }
@@ -47,7 +49,7 @@ namespace adfilter.ViewModel
                         ExecuteDelegate = x =>
                         {
                             Adf.Instance.Pause = true;
-                            Msg.Instance.Show("Driver stopped",true);
+                            Msg.Instance.Show(Res.msg_driver_stoped, true);
                         }
                     });
             }

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:vm="clr-namespace:adfilter.ViewModel"
+             xmlns:p="clr-namespace:adfilter.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
@@ -13,9 +14,9 @@
     <Grid>
 
         <StackPanel Orientation="Horizontal" Margin="20">
-            <ui:Tile Title="Start"
+            <ui:Tile Title="{x:Static p:Resources.label_start}"
                  Command="{Binding StartCommand}"/>
-            <ui:Tile Title="Stop" 
+            <ui:Tile Title="{x:Static p:Resources.label_stop}" 
                  Command="{Binding StopCommand}"/>
         </StackPanel>
     </Grid>
