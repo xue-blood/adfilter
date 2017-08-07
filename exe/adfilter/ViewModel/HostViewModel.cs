@@ -94,7 +94,7 @@ namespace adfilter.ViewModel
         {
             using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\services\adfilter") )
             {
-                return key.GetValue(RegKey) as string;
+                return (key.GetValue(RegKey) as string).Substring(4);
             }
         }
 
